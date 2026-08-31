@@ -13,7 +13,7 @@
 지정된 점프 키만으로 플레이어 캐릭터를 조종하는 간단한 조작 방식을 취한다.
 플레이어는 다가오는 장애물들을 피하고, 장시간 생존하며 점수를 획득해야 한다.
 
-![예시 이미지 - 지오메트리 대쉬](https://github.com/UnknownProjectCreater/26311048_HongSungChan_GameProject/blob/main/BlockRunnerReferenceImg.png)
+![예시 이미지 - 지오메트리 대쉬](https://github.com/UnknownProjectCreater/26311048_HongSungChan_GameProject/blob/main/GameDesignDocument_Images/BlockRunnerReferenceImg.png)
 
 #### 게임 조작 방법
 + 스페이스바를 눌러 플레이어 캐릭터를 점프시킨다.
@@ -48,7 +48,7 @@
 + 플레이어는 게임 화면 좌측에 위치한다.
 + 게임 플레이 화면 좌측 상단에 시간과 점수를 표기하는 UI를 위치시킨다.
 
-![예시 이미지 - 게임 플로우 차트](https://github.com/UnknownProjectCreater/26311048_HongSungChan_GameProject/blob/main/GameScreenComposition.png)
+![예시 이미지 - 게임 플로우 차트](https://github.com/UnknownProjectCreater/26311048_HongSungChan_GameProject/blob/main/GameDesignDocument_Images/GameScreenComposition.png)
 
 ### 4. 게임 진행 흐름
 + 게임의 전체적인 진행 흐름은 다음과 같다.
@@ -61,7 +61,7 @@
 3. 일정 시간마다 점수가 증가한다.
 4. 시간에 비례하여 난이도가 증가한다.
 
-![예시 이미지 - 게임 플로우 차트](https://github.com/UnknownProjectCreater/26311048_HongSungChan_GameProject/blob/main/gameFlowchart.png)
+![예시 이미지 - 게임 플로우 차트](https://github.com/UnknownProjectCreater/26311048_HongSungChan_GameProject/blob/main/GameDesignDocument_Images/gameFlowchart.png)
 
 ### 5. 주요 게임 객체 목록
 + 플레이어 캐릭터
