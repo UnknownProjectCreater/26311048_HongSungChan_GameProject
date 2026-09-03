@@ -1,3 +1,5 @@
+#include "glc2d.h"
+
 // link the 2d game library
 #if defined(_DEBUG)
 #if defined(_M_X64) // 64-bit 아키텍처

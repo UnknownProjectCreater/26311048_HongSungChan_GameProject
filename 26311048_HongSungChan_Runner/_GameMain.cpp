@@ -1,6 +1,5 @@
-
-#include <glc2d.h>
 #include <stdio.h>
+#include "glc2d.h"
 #include "GameMain.h"
 
 int GameMain::Init()
