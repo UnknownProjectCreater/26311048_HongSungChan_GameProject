@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-class SceneGameResult : Scene
+class SceneGameResult : public Scene
 {
 public:
 	int Init() override;

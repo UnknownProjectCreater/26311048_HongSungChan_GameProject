@@ -125,9 +125,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneGamePlay.cpp" />
     <ClCompile Include="SceneGameResult.cpp" />
     <ClCompile Include="SceneGameStart.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="_config.cpp" />
     <ClCompile Include="_main.cpp" />
   </ItemGroup>
@@ -136,11 +140,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CApplication.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGamePlay.h" />
     <ClInclude Include="SceneGameResult.h" />
     <ClInclude Include="SceneGameStart.h" />
+    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

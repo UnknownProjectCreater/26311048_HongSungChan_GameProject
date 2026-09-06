@@ -1,4 +1,5 @@
 #include "SceneGamePlay.h"
+#include "GameObject.h"
 
 int SceneGamePlay::Init()
 {

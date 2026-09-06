@@ -7,6 +7,7 @@ public:
 	virtual int Update();
 	virtual int Render();
 	virtual int Destroy();
+	virtual ~Scene() {}
 
-	std::string sceneName;
+	std::string m_sceneName;
 };

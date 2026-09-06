@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include "glc2d.h"
 #include "CApplication.h"
+#include "TextureManager.h"
 
 extern CApplication g_app;
+TextureManager g_textureManager;
 
 int AddUpdate()
 {
@@ -17,29 +19,30 @@ int AddRender()
 int CApplication::Init()
 {
 	InitSdk();
-
-	m_sceneStart.Init();
+	g_textureManager.SetTextureFiles();
+	m_currentScene = &m_sceneStart;
+	m_currentScene->Init();
 
 	return 0;
 }
 
 int CApplication::Update()
 {
-	m_sceneStart.Update();
+	m_currentScene->Update();
 
 	return 0;
 }
 
 int CApplication::Render()
 {
-	m_sceneStart.Render();
+	m_currentScene->Render();
 
 	return 0;
 }
 
 int CApplication::Destroy()
 {
-	m_sceneStart.Destroy();
+	m_currentScene->Destroy();
 
 	g2_DestroyWin();
 
@@ -58,3 +61,9 @@ int CApplication::InitSdk()
 	return 0;
 }
 
+int CApplication::SceneChange(Scene* changeScene)
+{
+	m_currentScene = changeScene;
+
+	return 0;
+}
