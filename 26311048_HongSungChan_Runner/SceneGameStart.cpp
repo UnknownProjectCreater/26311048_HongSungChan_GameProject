@@ -26,7 +26,7 @@ int PlayerController()
 	float deltaTime = (g_lastTime == 0) ? 0.0f : (now - g_lastTime) / 1000.0f;
 	g_lastTime = now;
 
-	float speed = 200.0f;
+	float speed = 300.0f;
 
 	if (pKeyboard[68])
 	{
@@ -48,6 +48,8 @@ int BackGroundScaling()
 
 	scaleX = (FLOAT)g_app.m_winSize.cx / nTexW;
 	scaleY = (FLOAT)g_app.m_winSize.cy / nTexH;
+
+	return 0;
 }
 
 int SceneGameStart::Init()
