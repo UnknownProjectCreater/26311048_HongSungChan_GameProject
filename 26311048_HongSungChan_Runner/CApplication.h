@@ -23,6 +23,7 @@ public:
 
 protected:
 	int InitSdk();
+	void ChangeScene(Scene* const scene) { m_currentScene = scene; };
 
 	// scene manage
 	Scene* m_currentScene = nullptr;

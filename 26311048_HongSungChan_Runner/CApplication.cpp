@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include "glc2d.h"
 #include "CApplication.h"
+#include "GameManager.h"
 #include "TextureManager.h"
+#include "Time.h"
 
 extern CApplication g_app;
+GameManager g_gameManager;
 TextureManager g_textureManager;
+Time g_time;
 
 int AddUpdate()
 {
@@ -28,7 +32,7 @@ int CApplication::Init()
 
 int CApplication::Update()
 {
-	m_currentScene->Update();
+	m_currentScene->Update(g_time.GetDeltaTime());
 
 	return 0;
 }
@@ -58,12 +62,5 @@ int CApplication::InitSdk()
 
 	g2_CreateWin(m_winPos.x, m_winPos.y, m_winSize.cx, m_winSize.cy, m_winName.c_str());
 	
-	return 0;
-}
-
-int CApplication::SceneChange(Scene* changeScene)
-{
-	m_currentScene = changeScene;
-
 	return 0;
 }

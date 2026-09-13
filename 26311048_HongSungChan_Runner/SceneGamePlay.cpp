@@ -6,7 +6,7 @@ int SceneGamePlay::Init()
 	return 0;
 }
 
-int SceneGamePlay::Update()
+int SceneGamePlay::Update(float deltaTime)
 {
 	return 0;
 }

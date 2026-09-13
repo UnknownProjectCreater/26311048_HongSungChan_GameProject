@@ -3,12 +3,17 @@
 #include "glc2d.h"
 #include "SceneGameStart.h"
 #include "CApplication.h"
+#include "GameManager.h"
 #include "GameObject.h"
+#include "Entity.h"
+#include "Platform.h"
+#include "Background.h"
 
 extern CApplication g_app;
+extern GameManager g_gameManager;
 
-GameObject* obj = new GameObject();
-GameObject* backGround = new GameObject();
+Entity* player;
+Background* background;
 
 int nTexW;
 int nTexH;
@@ -16,25 +21,21 @@ int nTexH;
 FLOAT scaleX;
 FLOAT scaleY;
 
-static long long g_lastTime = 0;
-
 int PlayerController()
 {
 	const KEYCODE* pKeyboard = g2_GetKeyboard();
-
-	long long now = g2_TimeGetTime();
-	float deltaTime = (g_lastTime == 0) ? 0.0f : (now - g_lastTime) / 1000.0f;
-	g_lastTime = now;
 
 	float speed = 300.0f;
 
 	if (pKeyboard[68])
 	{
-		obj->m_pos.x += speed * deltaTime;
+		VEC2 v(speed, 0);
+		player->SetVelocity(v);
 	}
 	else if (pKeyboard[65])
 	{
-		obj->m_pos.x -= speed * deltaTime;
+		VEC2 v(-speed, 0);
+		player->SetVelocity(v);
 	}
 
 	return 0;
@@ -42,7 +43,7 @@ int PlayerController()
 
 int BackGroundScaling()
 {
-	int nTx = backGround->m_texture;
+	int nTx = background->GetTexture();
 	nTexW = g2_TextureWidth(nTx);
 	nTexH = g2_TextureHeight(nTx);
 
@@ -54,20 +55,28 @@ int BackGroundScaling()
 
 int SceneGameStart::Init()
 {
-	obj->LoadTexture(TEXTURE_CUBE);
-	VEC2 objPos(10, 500);
-	obj->m_pos = objPos;
+	player = g_gameManager.CreateObject<Entity>();
+	background = g_gameManager.CreateBackground(BackgroundType::SCREEN_PLAY);
+	g_gameManager.m_currentBackgroundType = BackgroundType::SCREEN_PLAY;
 
-	backGround->LoadTexture(TEXTURE_BACKGROUND);
+	player->Init(Texture::PLAYER);
+	VEC2 objPos(10, 500);
+	player->SetPosition(objPos);
+
+	player->m_name = "asdf";
+
+	background->Init(Texture::BACKGROUND);
 	BackGroundScaling();
 
 	return 0;
 }
 
-int SceneGameStart::Update()
+int SceneGameStart::Update(float deltaTime)
 {
 	PlayerController();
 	
+	g_gameManager.UpdateAll(deltaTime);
+
 	return 0;
 }
 
@@ -76,14 +85,16 @@ int SceneGameStart::Render()
 	VEC2 pos(0, 0);
 	VEC2 scale(scaleX, scaleY);
 
-	backGround->Render(&scale);
+	background->SetScaling(scale);
 
-	obj->Render(0);
+	g_gameManager.RenderAll();
 
 	return 0;
 }
 
 int SceneGameStart::Destroy()
 {
+	g_gameManager.ClearAll();
+
 	return 0;
 }

@@ -5,7 +5,7 @@ int SceneGameResult::Init()
 	return 0;
 }
 
-int SceneGameResult::Update()
+int SceneGameResult::Update(float deltaTime)
 {
 	return 0;
 }

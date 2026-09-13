@@ -2,14 +2,67 @@
 #include <string>
 #include "glc2d.h"
 #include "TextureManager.h"
+
+struct Image
+{
+	VEC2 scaling;
+	int texture;
+	int alphaOption;
+};
+
+struct Collider
+{
+	float width;
+	float height;
+};
+
+enum class Tag
+{
+	NONE,
+	PLAYER,
+	ENEMY,
+	PLATFORM,
+	ITEM
+};
+
 class GameObject
 {
-public:
-	int LoadTexture(TEXTURE textureID);
-	int Render(VEC2* scaling);
-	int ReleaseTexture();
+private:
+	int m_id;
 
+protected:
+	VEC2 m_pos;
+	Collider m_collider;
+	Tag m_tag;
+	bool m_isActive;
+
+public:
 	std::string m_name;
-	VEC2 m_pos{0, 0};
-	int m_texture = -1;
+	Image m_image;
+
+	GameObject();
+	virtual ~GameObject();
+
+	virtual int Init(Texture textureId);
+	virtual int Update(float deltaTime) = 0;
+	virtual int Render() = 0;
+	virtual int Destroy();
+
+	VEC2 GetPosition() const { return m_pos; };
+	void SetPosition(const VEC2& pos) { m_pos = pos; };
+
+	Collider GetCollider() const { return m_collider;; };
+	void SetPosition(const Collider& col) { m_collider = col; };
+
+	Tag GetTag() const { return m_tag;; };
+	void SetPosition(const Tag& tag) { m_tag = tag; };
+
+	bool isActive() const { return m_isActive; };
+
+	int GetTexture() const { return m_image.texture; };
+
+	VEC2 GetScaling() const { return m_image.scaling; };
+	void SetScaling(const VEC2& scale) { m_image.scaling = scale; };
+
+	int GetId() const { return m_id; };
 };

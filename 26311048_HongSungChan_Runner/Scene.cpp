@@ -5,7 +5,7 @@ int Scene::Init()
 	return 0;
 }
 
-int Scene::Update()
+int Scene::Update(float deltaTime)
 {
 	return 0;
 }

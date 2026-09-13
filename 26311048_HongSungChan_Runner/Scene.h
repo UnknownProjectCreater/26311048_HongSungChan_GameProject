@@ -4,7 +4,7 @@ class Scene
 {
 public:
 	virtual int Init();
-	virtual int Update();
+	virtual int Update(float deltaTime);
 	virtual int Render();
 	virtual int Destroy();
 	virtual ~Scene() {}

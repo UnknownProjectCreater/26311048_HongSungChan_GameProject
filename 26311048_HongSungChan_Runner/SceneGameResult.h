@@ -4,7 +4,7 @@ class SceneGameResult : public Scene
 {
 public:
 	int Init() override;
-	int Update() override;
+	int Update(float deltaTime) override;
 	int Render() override;
 	int Destroy() override;
 };
