@@ -13,6 +13,7 @@ extern CApplication g_app;
 extern GameManager g_gameManager;
 
 Entity* player;
+Entity* obj;
 Background* background;
 
 int nTexW;
@@ -43,7 +44,7 @@ int PlayerController()
 
 int BackGroundScaling()
 {
-	int nTx = background->GetTexture();
+	int nTx = background->m_image.texture;
 	nTexW = g2_TextureWidth(nTx);
 	nTexH = g2_TextureHeight(nTx);
 
@@ -62,10 +63,8 @@ int SceneGameStart::Init()
 	player->Init(Texture::PLAYER);
 	VEC2 objPos(10, 500);
 	player->SetPosition(objPos);
-
-	player->m_name = "asdf";
-
 	background->Init(Texture::BACKGROUND);
+
 	BackGroundScaling();
 
 	return 0;
@@ -74,7 +73,7 @@ int SceneGameStart::Init()
 int SceneGameStart::Update(float deltaTime)
 {
 	PlayerController();
-	
+
 	g_gameManager.UpdateAll(deltaTime);
 
 	return 0;
@@ -82,7 +81,6 @@ int SceneGameStart::Update(float deltaTime)
 
 int SceneGameStart::Render()
 {
-	VEC2 pos(0, 0);
 	VEC2 scale(scaleX, scaleY);
 
 	background->SetScaling(scale);

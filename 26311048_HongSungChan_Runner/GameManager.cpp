@@ -5,9 +5,9 @@ int GameManager::m_nextId = 0;
 
 int GameManager::UpdateAll(float deltaTime)
 {
-	for (int i = 0; i < m_gameObjects.size(); i++)
+	for (auto& pair : m_gameObjects)
 	{
-		GameObject* gameObject = m_gameObjects[i];
+		GameObject* gameObject = pair.second;
 
 		if (gameObject->isActive())
 		{
@@ -22,9 +22,9 @@ int GameManager::RenderAll()
 {
 	m_backgrounds[m_currentBackgroundType]->Render();
 
-	for (int i = 0; i < m_gameObjects.size(); i++)
+	for (auto& pair : m_gameObjects)
 	{
-		GameObject* gameObject = m_gameObjects[i];
+		GameObject* gameObject = pair.second;
 
 		if (gameObject->isActive())
 		{

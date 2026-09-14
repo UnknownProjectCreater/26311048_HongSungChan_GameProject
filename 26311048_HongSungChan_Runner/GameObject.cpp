@@ -1,3 +1,5 @@
+
+#include <iostream>
 #include "CApplication.h"
 #include "GameManager.h"
 #include "TextureManager.h"
@@ -14,7 +16,7 @@ GameObject::GameObject()
 	m_isActive = true;
 
 	m_name = "";
-	m_image.scaling = { 0, 0 };
+	m_image.scaling = { 1, 1 };
 	m_image.texture = -1;
 	m_image.alphaOption = 1;
 }

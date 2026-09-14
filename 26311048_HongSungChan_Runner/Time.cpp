@@ -8,11 +8,11 @@ Time::Time()
 	m_timeScale = 1.0 / (double)m_periodFrequency;
 }
 
-double Time::GetDeltaTime()
+float Time::GetDeltaTime()
 {
 	QueryPerformanceCounter((LARGE_INTEGER*)&m_currentTime);
 	deltaTime = (double)(m_currentTime - m_lastTime) * m_timeScale;
 	m_lastTime = m_currentTime;
 
-	return deltaTime;
+	return (float)deltaTime;
 }

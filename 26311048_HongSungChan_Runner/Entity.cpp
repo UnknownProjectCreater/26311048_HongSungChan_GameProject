@@ -20,8 +20,8 @@ int Entity::Update(float deltaTime)
 
 int Entity::Render()
 {
-	g2_DrawAlphaOption(m_image.alphaOption);
-	g2_Draw2D(m_image.texture, NULL, &m_pos);
+	//g2_DrawAlphaOption(m_image.alphaOption);
+	g2_Draw2D(m_image.texture, NULL, &m_pos, &m_image.scaling);
 
 	return 0;
 }

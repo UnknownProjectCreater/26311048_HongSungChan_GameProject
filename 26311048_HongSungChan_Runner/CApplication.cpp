@@ -5,10 +5,16 @@
 #include "TextureManager.h"
 #include "Time.h"
 
+#include "GameObject.h"
+#include "Entity.h"
+#include "Background.h"
+
 extern CApplication g_app;
 GameManager g_gameManager;
 TextureManager g_textureManager;
 Time g_time;
+
+Background* entity;
 
 int AddUpdate()
 {
@@ -24,6 +30,7 @@ int CApplication::Init()
 {
 	InitSdk();
 	g_textureManager.SetTextureFiles();
+
 	m_currentScene = &m_sceneStart;
 	m_currentScene->Init();
 

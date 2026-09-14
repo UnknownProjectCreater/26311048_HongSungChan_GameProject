@@ -52,14 +52,12 @@ public:
 	void SetPosition(const VEC2& pos) { m_pos = pos; };
 
 	Collider GetCollider() const { return m_collider;; };
-	void SetPosition(const Collider& col) { m_collider = col; };
+	void SetCollider(const Collider& col) { m_collider = col; };
 
 	Tag GetTag() const { return m_tag;; };
-	void SetPosition(const Tag& tag) { m_tag = tag; };
+	void SetTag(const Tag& tag) { m_tag = tag; };
 
 	bool isActive() const { return m_isActive; };
-
-	int GetTexture() const { return m_image.texture; };
 
 	VEC2 GetScaling() const { return m_image.scaling; };
 	void SetScaling(const VEC2& scale) { m_image.scaling = scale; };

@@ -5,12 +5,12 @@ class Time
 {
 private:
 	double deltaTime;
-	double m_periodFrequency;
-	double m_lastTime;
 	double m_timeScale;
-	double m_currentTime;
+	__int64 m_periodFrequency;
+	__int64 m_lastTime;
+	__int64 m_currentTime;
 
 public:
 	Time();
-	double GetDeltaTime();
+	float GetDeltaTime();
 };
