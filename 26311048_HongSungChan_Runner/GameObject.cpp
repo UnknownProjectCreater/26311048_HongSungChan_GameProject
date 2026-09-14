@@ -25,7 +25,7 @@ GameObject::~GameObject()
 {
 }
 
-int GameObject::Init(Texture textureId)
+int GameObject::Init(TextureType textureId)
 {
 	m_image.texture = g2_TextureLoad(g_textureManager.m_textureFiles[textureId]);
 

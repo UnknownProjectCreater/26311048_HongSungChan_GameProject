@@ -16,4 +16,3 @@ public:
 	int Update(float deltaTime) override;
 	int Render() override;
 };
-

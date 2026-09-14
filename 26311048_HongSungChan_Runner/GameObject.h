@@ -3,7 +3,7 @@
 #include "glc2d.h"
 #include "TextureManager.h"
 
-struct Image
+struct Texture
 {
 	VEC2 scaling;
 	int texture;
@@ -38,12 +38,12 @@ protected:
 
 public:
 	std::string m_name;
-	Image m_image;
+	Texture m_image;
 
 	GameObject();
 	virtual ~GameObject();
 
-	virtual int Init(Texture textureId);
+	virtual int Init(TextureType textureId);
 	virtual int Update(float deltaTime) = 0;
 	virtual int Render() = 0;
 	virtual int Destroy();
