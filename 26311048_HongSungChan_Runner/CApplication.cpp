@@ -3,6 +3,7 @@
 #include "CApplication.h"
 #include "GameManager.h"
 #include "TextureManager.h"
+#include "SoundManager.h"
 #include "Time.h"
 
 #include "GameObject.h"
@@ -12,6 +13,8 @@
 extern CApplication g_app;
 GameManager g_gameManager;
 TextureManager g_textureManager;
+SoundManager g_soundManager;
+
 Time g_time;
 
 Background* entity;
@@ -30,6 +33,7 @@ int CApplication::Init()
 {
 	InitSdk();
 	g_textureManager.SetTextureFiles();
+	g_soundManager.SetTextureFiles();
 
 	m_currentScene = &m_sceneStart;
 	m_currentScene->Init();

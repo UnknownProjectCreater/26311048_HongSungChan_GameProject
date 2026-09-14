@@ -4,7 +4,7 @@
 
 enum class SoundType
 {
-
+	PLAYER_MOUSE_CLICKSOUND
 };
 
 class SoundManager
