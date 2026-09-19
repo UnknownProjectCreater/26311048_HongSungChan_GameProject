@@ -1,4 +1,7 @@
 #include "Entity.h"
+#include "GameManager.h"
+
+extern GameManager g_gameManager;
 
 Entity::Entity()
 {
@@ -12,6 +15,8 @@ Entity::~Entity()
 
 int Entity::Update(float deltaTime)
 {
+	VEC2 g = g_gameManager.GetGravity();
+	m_velocity = m_velocity - deltaTime * g;
 	m_pos.x += m_velocity.x * deltaTime;
 	m_pos.y += m_velocity.y * deltaTime;
 

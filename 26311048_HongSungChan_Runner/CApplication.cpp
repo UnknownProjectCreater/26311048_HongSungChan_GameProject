@@ -32,6 +32,7 @@ int AddRender()
 int CApplication::Init()
 {
 	InitSdk();
+	SetScenes();
 	g_textureManager.SetTextureFiles();
 	g_soundManager.SetTextureFiles();
 
@@ -44,6 +45,15 @@ int CApplication::Init()
 int CApplication::Update()
 {
 	m_currentScene->Update(g_time.GetDeltaTime());
+
+	if (m_isChangeScene)
+	{
+		m_currentScene->Destroy();
+		m_currentScene = m_scenes[m_currentSceneType];
+		m_currentScene->Init();
+
+		m_isChangeScene = false;
+	}
 
 	return 0;
 }
@@ -64,6 +74,12 @@ int CApplication::Destroy()
 	return 0;
 }
 
+void CApplication::SignChangeScene(SceneType sceneType)
+{
+	m_isChangeScene = true;
+	m_currentSceneType = sceneType;
+}
+
 int CApplication::InitSdk()
 {
 	g2_InitSdk();
@@ -73,5 +89,14 @@ int CApplication::InitSdk()
 
 	g2_CreateWin(m_winPos.x, m_winPos.y, m_winSize.cx, m_winSize.cy, m_winName.c_str());
 	
+	return 0;
+}
+
+int CApplication::SetScenes()
+{
+	m_scenes[SceneType::SCENESTART] = &m_sceneStart;
+	m_scenes[SceneType::SCENEPLAY] = &m_scenePlay;
+	m_scenes[SceneType::SCENERESULT] = &m_sceneResult;
+
 	return 0;
 }

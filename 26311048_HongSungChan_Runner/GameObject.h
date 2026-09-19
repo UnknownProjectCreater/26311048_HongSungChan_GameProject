@@ -48,6 +48,11 @@ public:
 	virtual int Render() = 0;
 	virtual int Destroy();
 
+	float GetLeft() const { return m_pos.x; };
+	float GetRight() const { return m_pos.x + m_collider.width; };
+	float GetTop() const { return m_pos.y; };
+	float GetBottom() const{ return m_pos.y + m_collider.height; };
+
 	VEC2 GetPosition() const { return m_pos; };
 	void SetPosition(const VEC2& pos) { m_pos = pos; };
 

@@ -60,6 +60,13 @@ int SceneGameStart::Update(float deltaTime)
 {
 	g_gameManager.UpdateAll(deltaTime);
 
+	const KEYCODE* pKeyboard = g2_GetKeyboard();
+
+	if (pKeyboard[VK_SPACE])
+	{
+		g_app.SignChangeScene(SceneType::SCENEPLAY);
+	}
+
 	return 0;
 }
 
