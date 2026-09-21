@@ -25,8 +25,8 @@ public:
 	void SignChangeScene(SceneType sceneType);
 
 	// windows
-	POINT m_winPos{ 100, 100 };
-	SIZE m_winSize{ 1024, 600 };
+	const POINT m_winPos{ 100, 100 };
+	const SIZE m_winSize{ 1024, 600 };
 	std::string m_winName = "Block Runner";
 
 protected:

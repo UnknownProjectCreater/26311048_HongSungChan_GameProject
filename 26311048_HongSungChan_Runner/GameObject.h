@@ -35,6 +35,10 @@ protected:
 	Collider m_collider;
 	Tag m_tag;
 	bool m_isActive;
+	bool m_isTrigger;
+	bool m_onGround;
+
+	friend class GameManager;
 
 public:
 	std::string m_name;
@@ -48,6 +52,11 @@ public:
 	virtual int Render() = 0;
 	virtual int Destroy();
 
+	bool OnGround() const { return m_onGround; };
+	virtual void OnCollision(const GameObject* obj) {};
+
+	void SetColliderSize();
+
 	float GetLeft() const { return m_pos.x; };
 	float GetRight() const { return m_pos.x + m_collider.width; };
 	float GetTop() const { return m_pos.y; };
@@ -58,6 +67,9 @@ public:
 
 	Collider GetCollider() const { return m_collider;; };
 	void SetCollider(const Collider& col) { m_collider = col; };
+
+	bool IsTrigger() const { return m_isTrigger;; };
+	void SetTrigger(const bool& isTrigger) { m_isTrigger = isTrigger; };
 
 	Tag GetTag() const { return m_tag;; };
 	void SetTag(const Tag& tag) { m_tag = tag; };

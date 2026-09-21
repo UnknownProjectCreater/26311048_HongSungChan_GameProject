@@ -13,14 +13,10 @@
 extern CApplication g_app;
 extern GameManager g_gameManager;
 
-Background* background;
-Image* gameTitle;
-Image* startButton;
-
 FLOAT scaleX;
 FLOAT scaleY;
 
-int BackGroundScaling()
+int BackGroundScaling(Background* background)
 {
 	int nTexW{ 0 };
 	int nTexH{ 0 };
@@ -43,15 +39,21 @@ int SceneGameStart::Init()
 
 	gameTitle = g_gameManager.CreateObject<Image>();
 	gameTitle->Init(TextureType::UI_TITLE_GAMEMAINMENU);
-	VEC2 titlePos = { 310, 10 };
-	gameTitle->SetPosition(titlePos);
+	VEC2 objPos = { 310, 10 };
+	gameTitle->SetPosition(objPos);
 
 	startButton = g_gameManager.CreateObject<Image>();
 	startButton->Init(TextureType::UI_BUTTON_GAMESTART);
-	VEC2 startButtonPos = { 400, 300 };
-	startButton->SetPosition(startButtonPos);
+	objPos = { 400, 300 };
+	startButton->SetPosition(objPos);
 
-	BackGroundScaling();
+	BackGroundScaling(background);
+
+	VEC2 backgroundScale(scaleX, scaleY);
+	background->SetScaling(backgroundScale);
+
+	VEC2 titleScale(2, 2);
+	gameTitle->SetScaling(titleScale);
 
 	return 0;
 }
@@ -72,12 +74,6 @@ int SceneGameStart::Update(float deltaTime)
 
 int SceneGameStart::Render()
 {
-	VEC2 backgroundScale(scaleX, scaleY);
-	background->SetScaling(backgroundScale);
-
-	VEC2 titleScale(2, 2);
-	gameTitle->SetScaling(titleScale);
-
 	//VEC2 startButtonScale(1, 1);
 	//startButton->SetScaling(startButtonScale);
 

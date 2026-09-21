@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <cmath>
 #include "CApplication.h"
 #include "GameManager.h"
 #include "TextureManager.h"
@@ -14,6 +15,7 @@ GameObject::GameObject()
 	m_collider = { 0, 0 };
 	m_tag = Tag::NONE;
 	m_isActive = true;
+	m_isTrigger = false;
 
 	m_name = "";
 	m_image.scaling = { 1, 1 };
@@ -37,4 +39,12 @@ int GameObject::Destroy()
 	g2_TextureRelease(m_image.texture);
 
 	return 0;
+}
+
+void GameObject::SetColliderSize()
+{
+	int nTx = m_image.texture;
+
+	m_collider.height = g2_TextureHeight(nTx) * m_image.scaling.y;
+	m_collider.width = g2_TextureWidth(nTx) *m_image.scaling.x;
 }

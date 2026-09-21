@@ -20,7 +20,12 @@ private:
 	static int m_nextId;
 	static VEC2 m_gravity;
 
+	Map m_map;
+
 public:
+	GameManager();
+	~GameManager();
+
 	BackgroundType m_currentBackgroundType;
 
 	int UpdateAll(float deltaTime);
@@ -45,8 +50,10 @@ public:
 		 return newObj;
 	 }
 
+	 void CheckCollistion();
+
 	 /// <summary>
 	 /// AABB 알고리즘을 이용하여 충돌 여부를 점검한다.
 	 /// </summary>
-	 bool OnCollision(const GameObject* a, const GameObject* b);
+	 bool CheckAABBCollision(const GameObject* a, const GameObject* b);
 };
