@@ -14,14 +14,45 @@ extern SoundManager g_soundManager;
 extern GameManager g_gameManager;
 
 Platform* platformTest;
+Platform* platformTest2;
 
 int PlayerController(Entity* player, int jumpSound)
 {
 	const KEYCODE* pKeyboard = g2_GetKeyboard();
 
 	float jumpForce = 350.0f;
+	float moveSpeed = 200.0f;
 
-	if (pKeyboard[VK_SPACE] && player->OnGround())
+	//for (int i = 9; i < 128; ++i)
+	//{
+	//	if (pKeyboard[i])
+	//	{
+	//		printf("You Pressed %d key!!!\n", i);
+	//	}
+	//}
+
+	if (pKeyboard[65])
+	{
+		VEC2 playerV = player->GetVelocity();
+		VEC2 v(-moveSpeed, playerV.y);
+		player->SetVelocity(v);
+		player->SetTexture(TextureType::ENTITY_PLAYER_BACK);
+	}
+	else if (pKeyboard[68])
+	{
+		VEC2 playerV = player->GetVelocity();
+		VEC2 v(moveSpeed, playerV.y);
+		player->SetVelocity(v);
+		player->SetTexture(TextureType::ENTITY_PLAYER_FRONT);
+	}
+	else
+	{
+		VEC2 playerV = player->GetVelocity();
+		VEC2 v(0, playerV.y);
+		player->SetVelocity(v);
+	}
+
+	if (pKeyboard[VK_SPACE] && player->IsOnGround())
 	{
 		g2_SoundPlay(jumpSound);
 
@@ -39,7 +70,7 @@ int SceneGamePlay::Init()
 
 	m_player = g_gameManager.CreateObject<Entity>();
 
-	m_player->Init(TextureType::ENTITY_PLAYER);
+	m_player->Init(TextureType::ENTITY_PLAYER_FRONT);
 	VEC2 objPos(200, 400);
 	m_player->SetPosition(objPos);
 
@@ -56,28 +87,32 @@ int SceneGamePlay::Init()
 
 	platformTest = g_gameManager.CreateObject<Platform>();
 	platformTest->Init(TextureType::GAMEOBJECT_OBSTACLE_TWOBLOCK);
-	objPos = { 300, 450 };
+	objPos = { 500, 450 };
 	platformTest->SetPosition(objPos);
 
 	scale = { 0.5f, 0.5f };
 	platformTest->SetScaling(scale);
 	platformTest->SetColliderSize();
-	platformTest->m_name = "asdf";
 
-	m_jumpSound = g2_SoundLoad(g_soundManager.m_soundFiles[SoundType::CHARACTER_JUMPSOUND]);
+	platformTest2 = g_gameManager.CreateObject<Platform>();
+	platformTest2->Init(TextureType::GAMEOBJECT_OBSTACLE_TWOBLOCK);
+	objPos = { 700, 450 };
+	platformTest2->SetPosition(objPos);
+
+	scale = { 0.5f, 0.5f };
+	platformTest2->SetScaling(scale);
+	platformTest2->SetColliderSize();
+
+	m_jumpSound = g2_SoundLoad(g_soundManager.m_soundFiles[SoundType::PLAYER_JUMPSOUND]);
 
 	return 0;
 }
 
 int SceneGamePlay::Update(float deltaTime)
 {
-	PlayerController(m_player, m_jumpSound);
-
-	float posX = platformTest->GetPosition().x + -100.0f * deltaTime;
-	VEC2 pos(posX, platformTest->GetPosition().y);
-	platformTest->SetPosition(pos);
-
 	g_gameManager.UpdateAll(deltaTime);
+
+	PlayerController(m_player, m_jumpSound);
 
 	return 0;
 }

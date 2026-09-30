@@ -48,3 +48,8 @@ void GameObject::SetColliderSize()
 	m_collider.height = g2_TextureHeight(nTx) * m_image.scaling.y;
 	m_collider.width = g2_TextureWidth(nTx) *m_image.scaling.x;
 }
+
+void GameObject::SetTexture(const TextureType textureId)
+{
+	m_image.texture = g2_TextureLoad(g_textureManager.m_textureFiles[textureId]);
+}

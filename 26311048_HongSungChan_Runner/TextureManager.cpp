@@ -6,7 +6,8 @@ int TextureManager::SetTextureFiles()
 {
 	printf("..... Set TextureFiles");
 
-	m_textureFiles[TextureType::ENTITY_PLAYER] = "resource/Texture/Player.png";
+	m_textureFiles[TextureType::ENTITY_PLAYER_FRONT] = "resource/Texture/Player_Front.png";
+	m_textureFiles[TextureType::ENTITY_PLAYER_BACK] = "resource/Texture/Player_Back.png";
 	m_textureFiles[TextureType::BACKGROUND] = "resource/Texture/Background/desert.png";
 	m_textureFiles[TextureType::GROUND] = "resource/Texture/Ground.png";
 	m_textureFiles[TextureType::GAMEOBJECT_OBSTACLE_ONEBLOCK] = "resource/Texture/Obstacle2.png";

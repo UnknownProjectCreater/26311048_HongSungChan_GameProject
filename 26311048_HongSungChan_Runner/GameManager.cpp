@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include "GameManager.h"
+#include "Entity.h"
 
 int GameManager::m_nextId = 0;
 VEC2 GameManager::m_gravity = { 0, 980.0f };
@@ -22,7 +23,7 @@ int GameManager::UpdateAll(float deltaTime)
 	{
 		GameObject* gameObject = pair.second;
 
-		if (gameObject->isActive())
+		if (gameObject->IsActive())
 		{
 			gameObject->Update(deltaTime);
 		}
@@ -39,7 +40,7 @@ int GameManager::RenderAll()
 	{
 		GameObject* gameObject = pair.second;
 
-		if (gameObject->isActive())
+		if (gameObject->IsActive())
 		{
 			gameObject->Render();
 		}
@@ -80,8 +81,8 @@ void GameManager::CheckCollistion()
 			}
 			else
 			{
-				objA->m_onGround = false;
-				objB->m_onGround = false;
+				objA->ExitCollision(objB);
+				objB->ExitCollision(objA);
 			}
 		}
 	}

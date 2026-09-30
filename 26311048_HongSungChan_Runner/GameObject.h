@@ -1,7 +1,11 @@
 #pragma once
 #include <string>
 #include "glc2d.h"
+#include "GameManager.h"
 #include "TextureManager.h"
+#include "Entity.h"
+
+extern GameManager g_gameManager;
 
 struct Texture
 {
@@ -27,18 +31,14 @@ enum class Tag
 
 class GameObject
 {
-private:
-	int m_id;
-
 protected:
 	VEC2 m_pos;
 	Collider m_collider;
 	Tag m_tag;
 	bool m_isActive;
 	bool m_isTrigger;
-	bool m_onGround;
 
-	friend class GameManager;
+	int m_id;
 
 public:
 	std::string m_name;
@@ -51,9 +51,6 @@ public:
 	virtual int Update(float deltaTime) = 0;
 	virtual int Render() = 0;
 	virtual int Destroy();
-
-	bool OnGround() const { return m_onGround; };
-	virtual void OnCollision(const GameObject* obj) {};
 
 	void SetColliderSize();
 
@@ -74,10 +71,14 @@ public:
 	Tag GetTag() const { return m_tag;; };
 	void SetTag(const Tag& tag) { m_tag = tag; };
 
-	bool isActive() const { return m_isActive; };
+	bool IsActive() const { return m_isActive; };
+
+	int GetTexture() const { return m_image.texture; };
+	void SetTexture(const TextureType textureId);
 
 	VEC2 GetScaling() const { return m_image.scaling; };
 	void SetScaling(const VEC2& scale) { m_image.scaling = scale; };
 
 	int GetId() const { return m_id; };
+	void SetId(int num) { m_id = num; };
 };

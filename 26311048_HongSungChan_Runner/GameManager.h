@@ -17,6 +17,7 @@ class GameManager
 private:
 	std::unordered_map<BackgroundType, GameObject*> m_backgrounds;
 	std::unordered_map<int, GameObject*> m_gameObjects;
+	std::unordered_map<int, Entity*> m_entities;
 	static int m_nextId;
 	static VEC2 m_gravity;
 
@@ -42,6 +43,14 @@ public:
 
 		 return newObj;
 	 }
+
+	 Entity* CreateEntity()
+	 {
+		 Entity* newEntity = new Entity;
+		 newEntity->SetId(m_nextId++);
+		 m_entities.insert({ newEntity->GetId(), newEntity });
+	 }
+
 	 Background* CreateBackground(BackgroundType type)
 	 {
 		 Background* newObj = new Background;
