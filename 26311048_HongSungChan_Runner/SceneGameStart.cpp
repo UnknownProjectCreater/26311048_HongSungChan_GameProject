@@ -6,9 +6,10 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "Entity.h"
-#include "Platform.h"
+#include "Obstacle.h"
 #include "Background.h"
 #include "Image.h"
+#include "TextureManager.h"
 
 extern CApplication g_app;
 extern GameManager g_gameManager;
@@ -33,27 +34,30 @@ int BackGroundScaling(Background* background)
 
 int SceneGameStart::Init()
 {
-	background = g_gameManager.CreateBackground(BackgroundType::SCREEN_PLAY);
+	m_background = g_gameManager.CreateBackground(BackgroundType::SCREEN_PLAY);
 	g_gameManager.m_currentBackgroundType = BackgroundType::SCREEN_PLAY;
-	background->Init(TextureType::BACKGROUND);
+	m_background->Init(TextureType::BACKGROUND);
 
-	gameTitle = g_gameManager.CreateObject<Image>();
-	gameTitle->Init(TextureType::UI_TITLE_GAMEMAINMENU);
+	m_gameTitle = g_gameManager.CreateObject<Image>();
+	m_gameTitle->Init(TextureType::UI_TITLE_GAMEMAINMENU);
 	VEC2 objPos = { 310, 10 };
-	gameTitle->SetPosition(objPos);
+	m_gameTitle->SetPosition(objPos);
 
-	startButton = g_gameManager.CreateObject<Image>();
-	startButton->Init(TextureType::UI_BUTTON_GAMESTART);
-	objPos = { 400, 300 };
-	startButton->SetPosition(objPos);
+	m_guidTextImage = g_gameManager.CreateObject<Image>();
+	m_guidTextImage->Init(TextureType::UI_GUIDTEXT);
+	objPos = { 340, 300 };
+	m_guidTextImage->SetPosition(objPos);
 
-	BackGroundScaling(background);
+	VEC2 scaling = { 3, 3 };
+	m_guidTextImage->SetScaling(scaling);
+
+	BackGroundScaling(m_background);
 
 	VEC2 backgroundScale(scaleX, scaleY);
-	background->SetScaling(backgroundScale);
+	m_background->SetScaling(backgroundScale);
 
 	VEC2 titleScale(2, 2);
-	gameTitle->SetScaling(titleScale);
+	m_gameTitle->SetScaling(titleScale);
 
 	return 0;
 }

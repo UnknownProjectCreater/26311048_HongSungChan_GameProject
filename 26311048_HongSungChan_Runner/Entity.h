@@ -2,39 +2,21 @@
 #include <unordered_map>
 #include "GameObject.h"
 
-enum class CollisionDirection
-{
-	Left,
-	Right,
-	Top,
-	Bottom
-};
-
-struct CollisionInfo
-{
-	GameObject* other = nullptr;
-
-	CollisionDirection collisionDir;
-};
-
 class Entity : public GameObject
 {
 protected:
 	VEC2 m_velocity;
 	int m_hp;
-
 	bool m_onGround;
-	
+
+	void ResolveCollision(const CollisionInfo& info);
+
 public:
 	Entity();
 	~Entity() override;
 
-	std::unordered_map<GameObject*, CollisionInfo> m_colliders;
-	std::unordered_map<GameObject*, CollisionInfo> m_previousColliders;
+	bool m_collisionObstacle;
 
-	void AddCollision(GameObject* other);
-
-	bool IsColliding() const { return !m_colliders.empty(); };
 	bool IsOnGround() const
 	{
 		for (const auto& collide : m_colliders)
@@ -46,18 +28,13 @@ public:
 		return false;
 	}
 
-	void BeginCollisionUpdate();
-	void AddCollider(GameObject* other, CollisionDirection direction);
-	void ProcessCollision();
-
 	int Update(float deltaTime) override;
 	int Render() override;
 
-	bool CollisionX(const GameObject* obj);
-	bool CollisionY(const GameObject* obj);
-	void OnCollision(const CollisionInfo& info);
+	void OnCollisionEnter(const CollisionInfo& info) override;
+	void OnCollisionStay(const CollisionInfo& info) override;
+	void OnCollisionExit(const CollisionInfo& info) override;
 
 	VEC2 GetVelocity() const { return m_velocity; };
 	void SetVelocity(const VEC2& v) { m_velocity = v; };
 };
-

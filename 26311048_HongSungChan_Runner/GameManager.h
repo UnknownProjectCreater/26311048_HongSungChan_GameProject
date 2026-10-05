@@ -1,8 +1,26 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
+#include <type_traits>
+#include <iostream>
+#include "glc2d.h"
 #include "GameObject.h"
 #include "Background.h"
+
+inline float GetMax(float a, float b)
+{
+	return a > b ? a : b;
+}
+
+inline float GetMin(float a, float b)
+{
+	return a > b ? b : a;
+}
+
+inline float Clamp(float value, float min, float max)
+{
+	return GetMin(GetMax(value, min), max);
+}
 
 struct Map
 {
@@ -17,9 +35,8 @@ class GameManager
 private:
 	std::unordered_map<BackgroundType, GameObject*> m_backgrounds;
 	std::unordered_map<int, GameObject*> m_gameObjects;
-	std::unordered_map<int, Entity*> m_entities;
-	static int m_nextId;
 	static VEC2 m_gravity;
+	static int m_nextId;
 
 	Map m_map;
 
@@ -28,6 +45,7 @@ public:
 	~GameManager();
 
 	BackgroundType m_currentBackgroundType;
+	int m_score = 0;
 
 	int UpdateAll(float deltaTime);
 	int RenderAll();
@@ -36,33 +54,31 @@ public:
 	VEC2 GetGravity() const { return m_gravity; };
 
 	template<typename T>
-	 T* CreateObject()
-	 {
-		 T* newObj = new T;
-		 m_gameObjects.insert({ m_nextId++, newObj });
+	T* CreateObject()
+	{
+		static_assert(std::is_base_of<GameObject, T>::value, "T must inherit GameObject");
 
-		 return newObj;
-	 }
+		T* newObj = new T;
+		int id = m_nextId++;
 
-	 Entity* CreateEntity()
-	 {
-		 Entity* newEntity = new Entity;
-		 newEntity->SetId(m_nextId++);
-		 m_entities.insert({ newEntity->GetId(), newEntity });
-	 }
+		newObj->m_id = id;
+		m_gameObjects[id] = newObj;
 
-	 Background* CreateBackground(BackgroundType type)
-	 {
-		 Background* newObj = new Background;
-		 m_backgrounds[type] = newObj;
+		return newObj;
+	}
 
-		 return newObj;
-	 }
+	Background* CreateBackground(BackgroundType type)
+	{
+		Background* newObj = new Background;
+		m_backgrounds[type] = newObj;
 
-	 void CheckCollistion();
+		return newObj;
+	}
 
-	 /// <summary>
-	 /// AABB 알고리즘을 이용하여 충돌 여부를 점검한다.
-	 /// </summary>
-	 bool CheckAABBCollision(const GameObject* a, const GameObject* b);
+	void CheckCollision();
+
+	/// <summary>
+	/// AABB 알고리즘을 이용하여 충돌 여부를 점검하고 충돌체를 배열에 삽입한다.
+	/// </summary>
+	bool CheckAABBCollision(GameObject* a, GameObject* b);
 };

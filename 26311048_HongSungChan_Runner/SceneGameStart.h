@@ -6,9 +6,9 @@
 class SceneGameStart : public Scene
 {
 private:
-	Background* background = nullptr;
-	Image* gameTitle = nullptr;
-	Image* startButton = nullptr;
+	Background* m_background = nullptr;
+	Image* m_gameTitle = nullptr;
+	Image* m_guidTextImage = nullptr;
 
 public:
 	int Init() override;
